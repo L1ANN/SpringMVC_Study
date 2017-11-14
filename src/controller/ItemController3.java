@@ -18,7 +18,7 @@ import java.util.List;
 public class ItemController3 {
 
     //商品列表：@RequestMapping中url建议和方法各一样，方便开发维护
-    @RequestMapping("/queryItems")
+    @RequestMapping("/queryItems.action")
     public ModelAndView queryItems(){
         List<Items> itemsList = new ArrayList<>();
 
@@ -31,7 +31,7 @@ public class ItemController3 {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("itemsList",itemsList);
-        modelAndView.setViewName("/WEB-INF/jsp/itemsList.jsp");
+        modelAndView.setViewName("itemsList");
         return modelAndView;
     }
 }

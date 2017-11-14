@@ -43,7 +43,12 @@
 
 
     <!--配置视图解析器 要求将jstl的包加到classpath-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--prefix:前缀-->
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <!--suffix:后缀-->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
 
 
     <!--配置Handler,由于使用了SimpleUrlHandlerMapping处理器映射，所以name要配置为url，同时需要id属性-->
