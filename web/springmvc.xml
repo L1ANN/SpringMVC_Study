@@ -1,0 +1,55 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd ">
+
+    <!--配置处理器映射器，springmvc框架会根据HandlerMapping接口判断是否是处理器映射器-->
+    <!--根据bean的name进行查找Handler，将action的url而配置在bean的name中-->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+    <!--
+    简单url映射
+    key：用户请求的url
+    标签内容：程序员编写的Handler在此配置文件中的id
+    -->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/items2.action">itemController2</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--注解处理器映射器-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+
+
+    <!--配置处理器适配器，springmvc框架会根据HandlerMapping接口判断是否是处理器适配器-->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+    <!--配置处理器适配器-->
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+    <!--注释的适配器-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+
+
+    <!--配置视图解析器 要求将jstl的包加到classpath-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+
+
+    <!--配置Handler,由于使用了SimpleUrlHandlerMapping处理器映射，所以name要配置为url，同时需要id属性-->
+    <bean id="itemController1" name="/itemList.action" class="controller.ItemController1"></bean>
+
+    <bean id="itemController2" class="controller.ItemController2"></bean>
+    <!--注解的Handler-->
+    <bean class="controller.ItemController3"/>
+</beans>
